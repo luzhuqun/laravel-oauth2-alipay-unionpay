@@ -30,12 +30,74 @@ class UnionpayController extends Controller
             'orderDesc' => 'My test order title', //订单名称
             'txnAmt' => '100', //订单价格
             'orderTimeoutInterval' => '600000', //订单接收超时时间
-            'bizType'        => '000202',//交易类型
+            'bizType'        => '000201',//交易类型
         ];
 
         $response = $gateway->purchase($order)->send();
         $response->redirect();
     }
+
+    public function query(){
+
+        $gateway = Omnipay::gateway('unionpay');
+
+        $order = [
+            'orderId' => date('YmdHis'),
+            'txnTime' => date('YmdHis'),
+            'bizType'        => '000201',//交易类型
+        ];
+
+        $response = $gateway->query($order)->send();
+        $response->redirect();
+    }
+
+    public function consumeUndo(){
+
+        $gateway = Omnipay::gateway('unionpay');
+
+        $order = [
+            'orderId' => date('YmdHis'),
+            'txnTime' => date('YmdHis'),
+            'txnAmt' => '100', //订单价格
+            'reqReserved' => '', //商户自定义保留域
+            'bizType'        => '000201',//交易类型
+        ];
+
+        $response = $gateway->consumeUndo($order)->send();
+        $response->redirect();
+    }
+
+    public function refund(){
+
+        $gateway = Omnipay::gateway('unionpay');
+
+        $order = [
+            'orderId' => date('YmdHis'),
+            'txnTime' => date('YmdHis'),
+            'txnAmt' => '100', //订单价格
+            'reqReserved' => '', //商户自定义保留域
+            'bizType'        => '000201',//交易类型
+        ];
+
+        $response = $gateway->refund($order)->send();
+        $response->redirect();
+    }
+
+    public function fileTransfer(){
+
+        $gateway = Omnipay::gateway('unionpay');
+
+        $order = [
+            'txnTime' => date('YmdHis'),
+            'fileType' => '00 ', //文件类型
+            'bizType'        => '000201',//交易类型
+        ];
+
+        $response = $gateway->fileTransfer($order)->send();
+        $response->redirect();
+    }
+
+
 
     public function result(){
 

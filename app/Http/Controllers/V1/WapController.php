@@ -20,7 +20,10 @@ class WapController extends Controller
     {
         //
     }
-
+    /**
+     *API测试
+     *
+     */
     public function pay(){
         $date = date("Y-m-d H:i:s",time());
         $gateway = Omnipay::gateway();
@@ -36,7 +39,10 @@ class WapController extends Controller
         $response->redirect();
 
     }
-
+    /**
+     *API测试
+     *
+     */
     public function query(){
         $date = date("Y-m-d H:i:s",time());
         $gateway = Omnipay::gateway();

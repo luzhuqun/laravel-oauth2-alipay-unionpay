@@ -162,6 +162,7 @@ return [
 
 	   App\Providers\OAuthServiceProvider::class,
        Ignited\LaravelOmnipay\LaravelOmnipayServiceProvider::class,
+       Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
 
     ],
 

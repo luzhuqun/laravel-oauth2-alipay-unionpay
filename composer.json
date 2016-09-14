@@ -11,7 +11,8 @@
         "lucadegasperi/oauth2-server-laravel": "5.1.*",
         "ignited/laravel-omnipay": "2.*",
         "luzhuqun/omnipay-alipay": "dev-master",
-        "lokielse/omnipay-unionpay": "dev-master"
+        "lokielse/omnipay-unionpay": "dev-master",
+        "mpociot/laravel-apidoc-generator": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

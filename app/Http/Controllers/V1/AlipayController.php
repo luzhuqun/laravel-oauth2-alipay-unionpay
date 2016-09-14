@@ -60,24 +60,44 @@ class AlipayController extends Controller
         $response->redirect();
     }
 
-    public function result(){
-
+       public function cancel(){
+        $date = date("Y-m-d H:i:s",time());
         $gateway = Omnipay::gateway();
-        $gateway->setAlipayPublicKey('/key/rsa_public_key.pem');
-
+        $gateway->setTimestamp($date);
         $options = [
-            'request_params'=> array_merge($_POST, $_GET),
+            "out_trade_no" => '111',
         ];
+        
+        $response = $gateway->cancel($options)->send();
+        $response->redirect();
+      
+    }
 
-        $response = $gateway->completePurchase($options)->send();
+    public function refundQuery(){
+        $date = date("Y-m-d H:i:s",time());
+        $gateway = Omnipay::gateway();
+        $gateway->setTimestamp($date);
+        $options = [
+            "out_trade_no" => '111',
+            "out_request_no" => '111',
+        ];
+        
+        $response = $gateway->refundQuery($options)->send();
+        $response->redirect();
+      
+    }
 
-        if ($response->isSuccessful() && $response->isTradeStatusOk()) {
-            //支付成功后操作
-            exit('支付成功');
-        } else {
-            //支付失败通知.
-            exit('支付失败');
-        }
-
+    public function billDownload(){
+        $date = date("Y-m-d H:i:s",time());
+        $gateway = Omnipay::gateway();
+        $gateway->setTimestamp($date);
+        $options = [
+            "bill_type" => 'trade',
+            "bill_date" => '2016-09',
+        ];
+        
+        $response = $gateway->billDownload($options)->send();
+        $response->redirect();
+      
     }
 }

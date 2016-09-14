@@ -13,6 +13,7 @@
  * username:test@test.com
  * password:password
  */
+Route::resource('/', 'IndexController');
 Route::post('oauth/access_token', function() {
  return Response::json(Authorizer::issueAccessToken());
 });
@@ -31,21 +32,27 @@ Route::get('/register',function(){$user = new App\User();
 $api = app('Dingo\Api\Routing\Router');
 
 //Show user info via restful service.
-$api->version('v1', ['namespace' => 'App\Http\Controllers'], function ($api) {
+$api->version('v1', ['namespace' => 'App\Http\Controllers\V1'], function ($api) {
     $api->get('users', 'UsersController@index');
     $api->get('users/{id}', 'UsersController@show');
 
 });
 
-//Just a test with auth check.
+//Just a test with auth check. 
 $api->version('v1', ['middleware' => 'api.auth'] , function ($api) {
     $api->get('time', function () {
         return ['now' => microtime(), 'date' => date('Y-M-D',time())];
     });
 
 	//支付宝支付处理   Dingo Api 控制器路径必须全 https://github.com/dingo/api/wiki/Creating-API-Endpoints
-	$api->get('alipay', ['uses' => 'App\Http\Controllers\V1\AlipayController@pay']);
-    $api->get('wap',  'App\Http\Controllers\V1\WapController@pay');
+	$api->get('alipay', 'App\Http\Controllers\V1\AlipayController@pay');
+	$api->get('alipay/query', 'App\Http\Controllers\V1\AlipayController@query');
+	$api->get('alipay/refund', 'App\Http\Controllers\V1\AlipayController@refund');
+	$api->get('alipay/refundQuery', 'App\Http\Controllers\V1\AlipayController@refundQuery');
+	$api->get('alipay/cancel', 'App\Http\Controllers\V1\AlipayController@cancel');
+	$api->get('alipay/billDownload', 'App\Http\Controllers\V1\AlipayController@billDownload');
+
+    $api->get('wap',  'App\Http\Controllers\V1\WapController@pay');//http://192.168.10.147:8002/api/wap?access%20token=VCQSjBmS6ydwnA65gw7lD6dDOph1XNVfA6rgyJCa
 	$api->get('wap/query','App\Http\Controllers\V1\WapController@query');
 	$api->get('wap/refund','App\Http\Controllers\V1\WapController@refund');
 	$api->get('wap/refundQuery','App\Http\Controllers\V1\WapController@refundQuery');
