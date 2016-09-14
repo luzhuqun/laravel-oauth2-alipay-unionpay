@@ -24,6 +24,7 @@
 ##支付宝Alipay
 ###[手机网站支付wap](https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.oZ2neQ&treeId=193&articleId=105287&docType=1)
 >config/laravel-omnipay.php中  
+
 ```php
 // 默认支付网关
     'default' => 'alipay',
@@ -43,6 +44,7 @@
 
 ###[当面付alipay](https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.tVs2QN&treeId=193&articleId=105203&docType=1)
 >config/laravel-omnipay.php中 
+
 ```php
 // 默认支付网关
     'default' => 'alipay',
@@ -67,6 +69,7 @@
 [无跳转支付](https://open.unionpay.com/ajweb/product/detail?id=2)：标准版000301、Token版000902   
 
 >config/laravel-omnipay.php中 
+
 ```php
 // 默认支付网关
     'default' => 'unionpay',
